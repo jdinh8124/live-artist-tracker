@@ -34,7 +34,7 @@ app.get('/api/getTop', (req, res, next) => {
       Authorization: 'Bearer BQCwJuTwYkEi4se_9kjGjVbriGTB4pbMK2BW5Pgy6GRoptZ7NjJO6ysZrYVm0Eew4M7H5ahD9Ok7xC6fuIrtys00hbo20WTLUY-Qfu9JrrRh_kMFzuNzXNj6WL8qVpEnYTkaG7cT4UqQSNcOJpV5RD6YWW9XmiLsen5v_its3NmC0POqd1J54IacC9c2KDPvMfHhiUiwKCZSxCAnPX6mJs5mp_Tk6IyDx-BjLtKbOlyeNZPxq3Sz0pM1N1iJH8hUjlolmHBoFn0SV9o'
     }
   })
-    .then(result => console.log(result))
+    .then(result => res.json(result.data.items))
     .catch(err => next(err));
 });
 
