@@ -7,23 +7,23 @@ export default class AllArtists extends React.Component {
     this.state = {};
   }
 
-  renderCards() {
-    const cards = [];
-    for (let i = 0; i < 10; i++) {
-      const card = <ArtistCards img={this.props.artists.images[i]} />;
-      cards.push(card);
-    }
+  // renderCards() {
+  //   const cards = [];
+  //   for (let i = 0; i < 10; i++) {
+  //     const card = <ArtistCards img={this.props.artists.images[i]} />;
+  //     cards.push(card);
+  //   }
 
-    return cards;
-  }
+  //   return cards;
+  // }
 
   render() {
-    const elements = this.renderCards();
+    // const elements = this.renderCards();
     return (
       <main className="d-flex flex-wrap  justify-content-center mt-3">
         <div className="card-group">
 
-          {elements}
+          {/* {elements} */}
         </div>
       </main>
     );
