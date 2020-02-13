@@ -8,22 +8,24 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      isLoading: true
+
     };
   }
 
   componentDidMount() {
-    fetch('/api/health-check')
-      .then(res => res.json())
-      .then(data => this.setState({ message: data.message || data.error }))
-      .catch(err => this.setState({ message: err.message }))
-      .finally(() => this.setState({ isLoading: false }));
+    this.getAllArtist();
+  }
+
+  getAllArtist() {
+    fetch('/api/getTop').then(response => {
+      return response.json();
+    })
+      .then(myJson => {
+        console.log(myJson);
+      });
   }
 
   render() {
-    return this.state.isLoading
-      ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message}</h1>;
+    return <h1>Hello</h1>;
   }
 }
