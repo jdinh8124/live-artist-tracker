@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const spotifyApi = new SpotifyWebApi();
 
-spotifyApi.setAccessToken('BQCwJuTwYkEi4se_9kjGjVbriGTB4pbMK2BW5Pgy6GRoptZ7NjJO6ysZrYVm0Eew4M7H5ahD9Ok7xC6fuIrtys00hbo20WTLUY-Qfu9JrrRh_kMFzuNzXNj6WL8qVpEnYTkaG7cT4UqQSNcOJpV5RD6YWW9XmiLsen5v_its3NmC0POqd1J54IacC9c2KDPvMfHhiUiwKCZSxCAnPX6mJs5mp_Tk6IyDx-BjLtKbOlyeNZPxq3Sz0pM1N1iJH8hUjlolmHBoFn0SV9o');
+spotifyApi.setAccessToken('BQCrhVDhuJ1wp8N9P7JKJzVnyllA3_7KfF2qIQaWONFz9cf_0bGITWDwxAQlUwX8No7d2yy5ayCBgddw85XVHTDY3GixdZWztP1fCFW9t4N15TJ8NqeJs-l3_tguMw4K19LW0xrKKlFFUL84XPG1YVXKJKjU727WznDiH5Tf7dY-5JMh-uWccvNoQWGY9yIPfbUVL9Ofhc7X9pkglNOYF0o0piNY5xmny_z38pwJHHevjLY5u8MqUKblIzdpFOGehyf0CD0vOzeRVfc');
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.get('/api/getTop', (req, res, next) => {
     url: 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=5',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer BQCwJuTwYkEi4se_9kjGjVbriGTB4pbMK2BW5Pgy6GRoptZ7NjJO6ysZrYVm0Eew4M7H5ahD9Ok7xC6fuIrtys00hbo20WTLUY-Qfu9JrrRh_kMFzuNzXNj6WL8qVpEnYTkaG7cT4UqQSNcOJpV5RD6YWW9XmiLsen5v_its3NmC0POqd1J54IacC9c2KDPvMfHhiUiwKCZSxCAnPX6mJs5mp_Tk6IyDx-BjLtKbOlyeNZPxq3Sz0pM1N1iJH8hUjlolmHBoFn0SV9o'
+      Authorization: 'Bearer BQCrhVDhuJ1wp8N9P7JKJzVnyllA3_7KfF2qIQaWONFz9cf_0bGITWDwxAQlUwX8No7d2yy5ayCBgddw85XVHTDY3GixdZWztP1fCFW9t4N15TJ8NqeJs-l3_tguMw4K19LW0xrKKlFFUL84XPG1YVXKJKjU727WznDiH5Tf7dY-5JMh-uWccvNoQWGY9yIPfbUVL9Ofhc7X9pkglNOYF0o0piNY5xmny_z38pwJHHevjLY5u8MqUKblIzdpFOGehyf0CD0vOzeRVfc'
     }
   })
     .then(result => res.json(result.data.items))
