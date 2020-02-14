@@ -4,6 +4,7 @@ export default function ArtistCards(props) {
 
   return (
     <div className="card w-75" >
+      {/* {console.log(props.img.images)} */}
       <img className="card-img-top" src={props.img} alt="Card image cap"/>
       <div className="card-body">
         <p className="card-text"></p>

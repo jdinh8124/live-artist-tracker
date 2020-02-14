@@ -7,9 +7,11 @@ const sessionMiddleware = require('./session-middleware');
 const SpotifyWebApi = require('spotify-web-api-node');
 const axios = require('axios');
 
-const spotifyApi = new SpotifyWebApi();
-
-spotifyApi.setAccessToken('BQCrhVDhuJ1wp8N9P7JKJzVnyllA3_7KfF2qIQaWONFz9cf_0bGITWDwxAQlUwX8No7d2yy5ayCBgddw85XVHTDY3GixdZWztP1fCFW9t4N15TJ8NqeJs-l3_tguMw4K19LW0xrKKlFFUL84XPG1YVXKJKjU727WznDiH5Tf7dY-5JMh-uWccvNoQWGY9yIPfbUVL9Ofhc7X9pkglNOYF0o0piNY5xmny_z38pwJHHevjLY5u8MqUKblIzdpFOGehyf0CD0vOzeRVfc');
+var spotifyApi = new SpotifyWebApi({
+  clientId: ' 730e84b51dc84b85a589f682a1ef6e7e',
+  clientSecret: '51359e0c9ecd486c830f9865bbd62d0d'
+});
+// spotifyApi.setAccessToken('BQANOhASlKgkj_5Ot7SQp73x3uxQh-vxnOy9M4RX0toTAy1Za2-ui35Mw_YUFPMK-eejxVp3gHk0bIzel6uG9r9yTs0A07fgVwIFzDMfZzauc9hbWLsiKjgQWTP5sJOmx4Ij576oOri3ZCcsc_eG0yenRQEKps-fBRw7NuFuGzMoNmz1DlD7AC40BHlcTBBAqspRm-PFtjYK5BTsv72dMwF1AL02-1j2yBwmQvRVSG4ei1YErpcvciAe3uT2zBNkhvwxOrz-nZ9aVic');
 
 const app = express();
 
@@ -31,7 +33,7 @@ app.get('/api/getTop', (req, res, next) => {
     url: 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=5',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer BQCrhVDhuJ1wp8N9P7JKJzVnyllA3_7KfF2qIQaWONFz9cf_0bGITWDwxAQlUwX8No7d2yy5ayCBgddw85XVHTDY3GixdZWztP1fCFW9t4N15TJ8NqeJs-l3_tguMw4K19LW0xrKKlFFUL84XPG1YVXKJKjU727WznDiH5Tf7dY-5JMh-uWccvNoQWGY9yIPfbUVL9Ofhc7X9pkglNOYF0o0piNY5xmny_z38pwJHHevjLY5u8MqUKblIzdpFOGehyf0CD0vOzeRVfc'
+      Authorization: 'Bearer BQANOhASlKgkj_5Ot7SQp73x3uxQh-vxnOy9M4RX0toTAy1Za2-ui35Mw_YUFPMK-eejxVp3gHk0bIzel6uG9r9yTs0A07fgVwIFzDMfZzauc9hbWLsiKjgQWTP5sJOmx4Ij576oOri3ZCcsc_eG0yenRQEKps-fBRw7NuFuGzMoNmz1DlD7AC40BHlcTBBAqspRm-PFtjYK5BTsv72dMwF1AL02-1j2yBwmQvRVSG4ei1YErpcvciAe3uT2zBNkhvwxOrz-nZ9aVic'
     }
   })
     .then(result => res.json(result.data.items))

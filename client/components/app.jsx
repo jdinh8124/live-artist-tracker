@@ -7,6 +7,7 @@ export default class App extends React.Component {
     this.state = {
       artists: []
     };
+    this.getAllArtist = this.getAllArtist.bind(this);
   }
 
   componentDidMount() {
@@ -23,11 +24,18 @@ export default class App extends React.Component {
       });
   }
 
+  cardsReady() {
+    if (this.state.artists.length > 0) {
+      return <AllArtists artists={this.state.artists} />;
+    }
+
+  }
+
   render() {
     return (
       <>
         <Header/>
-        <AllArtists artists={this.state.artists}/>
+        {this.cardsReady()}
       </>
     );
   }
