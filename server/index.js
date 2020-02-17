@@ -8,8 +8,8 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const axios = require('axios');
 
 var spotifyApi = new SpotifyWebApi({
-  clientId: ' 730e84b51dc84b85a589f682a1ef6e7e',
-  clientSecret: '51359e0c9ecd486c830f9865bbd62d0d'
+  clientId: 'fcecfc72172e4cd267473117a17cbd4d',
+  clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7'
 });
 // spotifyApi.setAccessToken('BQANOhASlKgkj_5Ot7SQp73x3uxQh-vxnOy9M4RX0toTAy1Za2-ui35Mw_YUFPMK-eejxVp3gHk0bIzel6uG9r9yTs0A07fgVwIFzDMfZzauc9hbWLsiKjgQWTP5sJOmx4Ij576oOri3ZCcsc_eG0yenRQEKps-fBRw7NuFuGzMoNmz1DlD7AC40BHlcTBBAqspRm-PFtjYK5BTsv72dMwF1AL02-1j2yBwmQvRVSG4ei1YErpcvciAe3uT2zBNkhvwxOrz-nZ9aVic');
 
@@ -41,7 +41,8 @@ app.get('/api/getTop', (req, res, next) => {
 });
 
 app.get('/api/artists', (req, res, next) => {
-
+// 45eNHdiiabvmbp4erw26rg
+  console.log('hello');
   spotifyApi.getArtist('45eNHdiiabvmbp4erw26rg')
     .then(result => res.json(result.body))
     .catch(err => next(err));

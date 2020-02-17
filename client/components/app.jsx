@@ -5,13 +5,15 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      artists: []
+      artists: [],
+      chosenArtist: []
     };
     this.getAllArtist = this.getAllArtist.bind(this);
+    this.getOneArtist = this.getOneArtist.bind(this);
   }
 
   componentDidMount() {
-    this.getAllArtist();
+
   }
 
   getAllArtist() {
@@ -20,7 +22,6 @@ export default class App extends React.Component {
     })
       .then(myJson => {
         this.setState({ artists: myJson });
-        console.log(myJson);
       });
   }
 
@@ -28,14 +29,21 @@ export default class App extends React.Component {
     if (this.state.artists.length > 0) {
       return <AllArtists artists={this.state.artists} />;
     }
+  }
 
+  getOneArtist() {
+    fetch('/api/artists').then(response => {
+      return response.json();
+    });
   }
 
   render() {
     return (
       <>
         <Header/>
+        <button onClick={this.getOneArtist}>Test Illenium</button>
         {this.cardsReady()}
+        {this.getOneArtist()}
       </>
     );
   }
