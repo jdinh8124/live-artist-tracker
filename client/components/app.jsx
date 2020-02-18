@@ -4,12 +4,24 @@ import AllArtists from './allartists';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    const params = this.getHashParams();
+
     this.state = {
       artists: [],
       chosenArtist: []
     };
     this.getAllArtist = this.getAllArtist.bind(this);
     this.getOneArtist = this.getOneArtist.bind(this);
+  }
+
+  getHashParams() {
+    var hashParams = {};
+    var e; var r = /([^&;=]+)=?([^&;]*)/g;
+    var q = window.location.hash.substring(1);
+    while (e = r.exec(q)) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
   }
 
   componentDidMount() {
