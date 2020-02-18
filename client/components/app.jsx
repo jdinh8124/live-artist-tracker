@@ -1,17 +1,24 @@
 import React from 'react';
 import Header from './header';
 import AllArtists from './allartists';
+import Spotify from 'spotify-web-api-js';
+
+const spotifyWebApi = new Spotify();
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     const params = this.getHashParams();
-
     this.state = {
       artists: [],
-      chosenArtist: []
+      chosenArtist: [],
+      loggedIn: !!params.access_token
     };
     this.getAllArtist = this.getAllArtist.bind(this);
     this.getOneArtist = this.getOneArtist.bind(this);
+    if (params.access_token) {
+      spotifyWebApi.setAccessToken(params.access_token);
+    }
   }
 
   getHashParams() {
@@ -53,9 +60,9 @@ export default class App extends React.Component {
     return (
       <>
         <Header/>
-        <button onClick={this.getOneArtist}>Test Illenium</button>
-        {this.cardsReady()}
-        {this.getOneArtist()}
+        <a href="http://locahost:8888">
+          <button>Login with Spotify</button>
+        </a>
       </>
     );
   }
