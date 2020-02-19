@@ -16,7 +16,7 @@ const sessionMiddleware = expressSession({
     path: path.join(__dirname, 'sessions/')
   }),
   saveUninitialized: false,
-  secret: process.env.SESSION_SECRET
+  secret: 8888
 });
 
 module.exports = sessionMiddleware;
