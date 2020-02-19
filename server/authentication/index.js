@@ -10,7 +10,7 @@ const request = require('request'); // "Request" library
 const cors = require('cors');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
-const alloc = require('buffer-alloc');
+const session = require('express-session');
 const app = express();
 
 const client_id = '730e84b51dc84b85a589f682a1ef6e7e'; // Your client id
@@ -34,10 +34,10 @@ var generateRandomString = function (length) {
 };
 
 var stateKey = 'spotify_auth_state';
-// app.use(express.static(__dirname + '/public'))
+// app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(cookieParser(generateRandomString));
-app.use(express.session());
+// app.use(session());
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 app.use(express.json());
@@ -92,7 +92,7 @@ app.get('/callback', function (req, res) {
         grant_type: 'authorization_code'
       },
       headers: {
-        Authorization: 'Basic ' + (alloc(client_id + ':' + client_secret).toString('base64'))
+        Authorization: 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
       },
       json: true
     };
@@ -136,7 +136,7 @@ app.get('/refresh_token', function (req, res) {
   var refresh_token = req.query.refresh_token;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
-    headers: { Authorization: 'Basic ' + (alloc(client_id + ':' + client_secret).toString('base64')) },
+    headers: { Authorization: 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
     form: {
       grant_type: 'refresh_token',
       refresh_token: refresh_token
