@@ -34,10 +34,10 @@ var generateRandomString = function (length) {
 };
 
 var stateKey = 'spotify_auth_state';
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(cookieParser(generateRandomString));
-app.use(session());
+// app.use(session());
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 app.use(express.json());
