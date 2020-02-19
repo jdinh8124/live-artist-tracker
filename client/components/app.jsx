@@ -1,19 +1,38 @@
 import React from 'react';
+import Header from './header';
+import AllArtists from './allartists';
+import Spotify from 'spotify-web-api-js';
 
-// getTopArtist(){
-//   //curl -X "GET" "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=5" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQDZ1PLW6Dh4kq5BefpsZEbeyfYSEoigmWnkZDEAl6fB5e3MgE47pC2NSkVy_btJsLMBKXIupF0kFAjoCEbYIVgwAFhi_G2fZroNLotLxUi-pVXi9mUTBNPFXdmhiAGEC3PrnsDjKo3BMY2_sUMWSyqm"
-// }
+const spotifyWebApi = new Spotify();
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    const params = this.getHashParams();
     this.state = {
-
+      artists: [],
+      chosenArtist: [],
+      loggedIn: !!params.access_token
     };
+    this.getAllArtist = this.getAllArtist.bind(this);
+    this.getOneArtist = this.getOneArtist.bind(this);
+    if (params.access_token) {
+      spotifyWebApi.setAccessToken(params.access_token);
+    }
+  }
+
+  getHashParams() {
+    var hashParams = {};
+    var e; var r = /([^&;=]+)=?([^&;]*)/g;
+    var q = window.location.hash.substring(1);
+    while (e === r.exec(q)) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
   }
 
   componentDidMount() {
-    this.getAllArtist();
+
   }
 
   getAllArtist() {
@@ -21,11 +40,30 @@ export default class App extends React.Component {
       return response.json();
     })
       .then(myJson => {
-        console.log(myJson);
+        this.setState({ artists: myJson });
       });
   }
 
+  cardsReady() {
+    if (this.state.artists.length > 0) {
+      return <AllArtists artists={this.state.artists} />;
+    }
+  }
+
+  getOneArtist() {
+    fetch('/api/artists').then(response => {
+      return response.json();
+    });
+  }
+
   render() {
-    return <h1>Hello</h1>;
+    return (
+      <>
+        <Header/>
+        <a href="http://localhost:8888">
+          <button>Login with Spotify</button>
+        </a>
+      </>
+    );
   }
 }

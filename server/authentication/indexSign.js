@@ -10,6 +10,7 @@ const request = require('request'); // "Request" library
 const cors = require('cors');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
+const alloc = require('buffer-alloc');
 const app = express();
 
 const client_id = '730e84b51dc84b85a589f682a1ef6e7e'; // Your client id
@@ -34,8 +35,9 @@ var generateRandomString = function (length) {
 
 var stateKey = 'spotify_auth_state';
 // app.use(express.static(__dirname + '/public'))
-app.use(cors())
-  .use(cookieParser());
+app.use(cors());
+app.use(cookieParser(generateRandomString));
+app.use(express.session());
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 app.use(express.json());
@@ -57,13 +59,13 @@ app.get('/login', function (req, res) {
   // your application requests authorization
   var scope = 'user-read-private user-read-email user-read-playback-state user-top-read';
   res.redirect('https://accounts.spotify.com/authorize?' +
-  querystring.stringify({
-    response_type: 'code',
-    client_id: client_id,
-    scope: scope,
-    redirect_uri: redirect_uri,
-    state: state
-  }));
+    querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state
+    }));
 });
 
 app.get('/callback', function (req, res) {
@@ -90,7 +92,7 @@ app.get('/callback', function (req, res) {
         grant_type: 'authorization_code'
       },
       headers: {
-        Authorization: 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+        Authorization: 'Basic ' + (alloc(client_id + ':' + client_secret).toString('base64'))
       },
       json: true
     };
@@ -134,7 +136,7 @@ app.get('/refresh_token', function (req, res) {
   var refresh_token = req.query.refresh_token;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
-    headers: { Authorization: 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+    headers: { Authorization: 'Basic ' + (alloc(client_id + ':' + client_secret).toString('base64')) },
     form: {
       grant_type: 'refresh_token',
       refresh_token: refresh_token
@@ -173,7 +175,7 @@ app.get('/api/getTop', (req, res, next) => {
 });
 
 app.get('/api/artists', (req, res, next) => {
-// 45eNHdiiabvmbp4erw26rg
+  // 45eNHdiiabvmbp4erw26rg
   console.log('hello');
   spotifyApi.getArtist('45eNHdiiabvmbp4erw26rg')
     .then(result => res.json(result.body))
@@ -196,7 +198,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(8888, () => {
   // eslint-disable-next-line no-console
-  console.log('Listening on port', process.env.PORT);
+  console.log('Listening on port', 8888);
 });
