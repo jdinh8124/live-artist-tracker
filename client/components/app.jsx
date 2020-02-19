@@ -25,7 +25,7 @@ export default class App extends React.Component {
     var hashParams = {};
     var e; var r = /([^&;=]+)=?([^&;]*)/g;
     var q = window.location.hash.substring(1);
-    while (e = r.exec(q)) {
+    while (e === r.exec(q)) {
       hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
@@ -60,7 +60,7 @@ export default class App extends React.Component {
     return (
       <>
         <Header/>
-        <a href="http://locahost:8888">
+        <a href="http://localhost:8888">
           <button>Login with Spotify</button>
         </a>
       </>

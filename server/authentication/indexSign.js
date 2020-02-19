@@ -35,7 +35,8 @@ var generateRandomString = function (length) {
 var stateKey = 'spotify_auth_state';
 // app.use(express.static(__dirname + '/public'))
 app.use(cors())
-  .use(cookieParser());
+  .use(cookieParser('secret'));
+
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 app.use(express.json());
